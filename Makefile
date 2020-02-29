@@ -13,14 +13,14 @@ clean:
 
 test: $(MAIN)
 	@echo "test:"
-	@echo "he hello  \nyo yo s\n 67 hety h yehh  fasdfd\n 5"
+	@cat test.txt
 	@echo ---
-	@echo "he hello  \nyo yo s\n 67 hety h yehh  fasdfd\n 5" | ./$< 0
+	@cat test.txt | ./$< 0
 	@echo ---
-	@echo "he hello  \nyo yo s\n 67 hety h yehh  fasdfd\n 5" | ./$< 1
+	@cat test.txt | ./$< 1
 	@echo ---
-	@echo "he hello  \nyo yo s\n 67 hety h yehh  fasdfd\n 5" | ./$< 2
+	@cat test.txt | ./$< 2
 	@echo ---
-	@echo "he hello  \nyo yo s\n 67 hety h yehh  fasdfd\n 5" | ./$< 3
+	@cat test.txt | ./$< 3
 	@echo ---
-	@echo "he hello  \nyo yo s\n 67 hety h yehh  fasdfd\n 5" | ./$< 4
+	@cat test.txt | ./$< 4

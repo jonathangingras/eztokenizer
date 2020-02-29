@@ -4,15 +4,13 @@
 #include "word.h"
 
 struct text_position {
+  FILE *output;
   size_t line, word, wanted_column;
 };
 
 static int for_each_word(char *word, size_t len, struct text_position *position) {
   if (position->word == position->wanted_column) {
-    if (len > 1 && is_word_separator(word[len-1])) {
-      word[len-1] = 0;
-    }
-    fprintf(stdout, "'%s'", word);
+      fprintf(position->output, "%s", word);
   }
 
   ++position->word;
@@ -24,7 +22,7 @@ static int for_each_line(char *line, size_t len, struct text_position *position)
   struct buffer_memory_input input = {
     .input = line,
     .offset = 0,
-    .max = len-1, /* to remove \n */
+    .max = len,
   };
 
   struct byte_reader reader = {
@@ -33,7 +31,7 @@ static int for_each_line(char *line, size_t len, struct text_position *position)
   };
 
   if (position->line > 0) {
-    fprintf(stdout, "\n");
+    fprintf(position->output, "\n");
   }
 
   ++position->line;
@@ -46,6 +44,7 @@ static int print_column(FILE *output, int column_index, FILE *input) {
   int err;
 
   struct text_position position = {
+    .output = output,
     .line = 0,
     .word = 0,
     .wanted_column = (size_t)column_index,
@@ -61,7 +60,7 @@ static int print_column(FILE *output, int column_index, FILE *input) {
   }
 
   if (position.line > 0) {
-    fprintf(stdout, "\n");
+    fprintf(output, "\n");
   }
 
   return 0;
