@@ -1,8 +1,8 @@
 #include "parse.h"
 
 static int execute_on_stop(struct buffer *buffer,
-                       int (*on_stop)(char *line, size_t len, void *data),
-                       void *data) {
+                           int (*on_stop)(char *line, size_t len, void *data),
+                           void *data) {
   int err;
 
   if((err = buffer_add_byte(buffer, 0))) {
